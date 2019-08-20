@@ -166,6 +166,7 @@ public class DataTypesProvider extends ComponentProviderAdapter {
 		// FileEdit group
 		addLocalAction(new LockArchiveAction(plugin)); // Archive
 		addLocalAction(new UnlockArchiveAction(plugin)); // Archive
+		addLocalAction(new EditDataOrganizationAction(plugin)); // Archive
 
 		// Repository group : version control actions
 		addVersionControlActions(); // Archive

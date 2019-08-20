@@ -38,6 +38,7 @@ public class DataOrganizationPanel extends JPanel {
 	JTextField floatSizeComponent;
 	JTextField doubleSizeComponent;
 	JTextField longDoubleSizeComponent;
+	JTextField pointerSizeComponent;
 
 	JTextField absoluteMaxAlignComponent;
 	JTextField machineAlignComponent;
@@ -62,6 +63,7 @@ public class DataOrganizationPanel extends JPanel {
 		setUpFloatSize();
 		setUpDoubleSize();
 		setUpLongDoubleSize();
+		setUpPointerSize();
 
 		add(new GLabel(""));
 		add(new GLabel(""));
@@ -96,6 +98,8 @@ public class DataOrganizationPanel extends JPanel {
 		add(doubleSizeComponent);
 		add(new GLabel("LongDouble Size"));
 		add(longDoubleSizeComponent);
+		add(new GLabel("Pointer Size"));
+		add(pointerSizeComponent);
 		add(new GLabel(""));
 		add(new GLabel(""));
 	}
@@ -117,6 +121,7 @@ public class DataOrganizationPanel extends JPanel {
 		int floatSize = dataOrganization.getFloatSize();
 		int doubleSize = dataOrganization.getDoubleSize();
 		int longDoubleSize = dataOrganization.getLongDoubleSize();
+		int pointerSize = dataOrganization.getPointerSize();
 
 		String maxAlignString =
 			(absoluteMaxAlignment == 0) ? "none" : Integer.toString(absoluteMaxAlignment);
@@ -134,6 +139,7 @@ public class DataOrganizationPanel extends JPanel {
 		floatSizeComponent.setText(Integer.toString(floatSize));
 		doubleSizeComponent.setText(Integer.toString(doubleSize));
 		longDoubleSizeComponent.setText(Integer.toString(longDoubleSize));
+		pointerSizeComponent.setText(Integer.toString(pointerSize));
 	}
 
 	private void setUpSignedChar() {
@@ -334,6 +340,27 @@ public class DataOrganizationPanel extends JPanel {
 			}
 		});
 	}
+	
+	private void setUpPointerSize() {
+		pointerSizeComponent = new JTextField(3);
+		pointerSizeComponent.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				updatedPointerSize();
+			}
+		});
+		pointerSizeComponent.addFocusListener(new FocusListener() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				updatedPointerSize();
+			}
+		});
+	}
 
 	private void setUpAbsoluteMaxAlignment() {
 		absoluteMaxAlignComponent = new JTextField(3);
@@ -467,6 +494,11 @@ public class DataOrganizationPanel extends JPanel {
 	protected void updatedLongDoubleSize() {
 		int longDoubleSize = Integer.decode(longDoubleSizeComponent.getText()).intValue();
 		dataOrganization.setLongDoubleSize(longDoubleSize);
+	}
+	
+	protected void updatedPointerSize() {
+		int pointerSize = Integer.decode(pointerSizeComponent.getText()).intValue();
+		dataOrganization.setPointerSize(pointerSize);
 	}
 
 	protected void updatedAbsoluteMaxAlignment() {
